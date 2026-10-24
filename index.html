@@ -28,7 +28,7 @@ body{
   padding-top:env(safe-area-inset-top);
   overflow-x:hidden;
 }
-body::before{ /* pola geometris halus di seluruh latar */
+body::before{
   content:'';position:fixed;inset:0;pointer-events:none;opacity:.5;
   background-image:
     repeating-conic-gradient(from 0deg at 50% 50%,rgba(184,146,74,.07) 0 10deg,transparent 10deg 20deg);
@@ -36,9 +36,8 @@ body::before{ /* pola geometris halus di seluruh latar */
   -webkit-mask:radial-gradient(circle at 50% 50%,#000 0%,transparent 70%);
           mask:radial-gradient(circle at 50% 50%,#000 0%,transparent 70%);
 }
-button,input{font:inherit;transition:.2s ease}
+button,input,select{font:inherit;transition:.2s ease}
 
-/* ===== Ornamen dekoratif (dibuat dengan CSS/SVG, bukan potongan gambar) ===== */
 .deco{position:fixed;pointer-events:none;z-index:0}
 .mandala{width:260px;height:260px;border-radius:50%;opacity:.35;
   background:
@@ -56,35 +55,30 @@ button,input{font:inherit;transition:.2s ease}
 .skyline{position:fixed;left:0;right:0;bottom:0;height:34vh;min-height:170px;z-index:0;pointer-events:none;opacity:.32}
 .skyline svg{width:100%;height:100%}
 
-/* ===== Layout ===== */
 main{position:relative;z-index:1;padding:var(--g);padding-bottom:calc(var(--nav) + var(--g) + env(safe-area-inset-bottom));max-width:760px;margin:0 auto}
 h1{font-family:'Amiri',Georgia,serif;font-size:clamp(30px,7vw,40px);font-weight:700;color:var(--gold-d);text-align:center;margin:8px 0 18px;text-shadow:0 1px 0 #fff}
 h1::after{content:'';display:block;width:160px;height:10px;margin:6px auto 0;
   background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);
   -webkit-mask:linear-gradient(#000 0 0) center/100% 1px no-repeat;mask:linear-gradient(#000 0 0) center/100% 1px no-repeat}
-
-/* sub-judul dengan garis emas + berlian */
 h2{position:relative;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gold-d);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:22px 4px 10px}
 h2::before,h2::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
 h2::after{background:linear-gradient(270deg,transparent,var(--gold))}
 
-/* ===== Kartu bergaya bingkai emas ===== */
 .card{position:relative;background:linear-gradient(180deg,var(--paper),#F9F1DC);border-radius:18px;border:1.5px solid var(--gold);box-shadow:0 0 0 4px var(--cream),0 0 0 5px var(--gold-l),0 10px 24px rgba(90,64,20,.12);overflow:hidden;margin:0 6px}
 .pad{padding:18px}
 .mu{color:var(--mu)}
 .meta{color:var(--mu);font-size:14px;margin-top:10px;text-align:center}
 
-/* hero hijau */
 .hero{background:
     radial-gradient(circle at 85% 30%,rgba(255,255,255,.12) 0,transparent 35%),
     repeating-conic-gradient(from 0deg at 100% 0%,rgba(227,205,151,.08) 0 8deg,transparent 8deg 16deg),
     linear-gradient(135deg,#136048,var(--green-d));
   color:#F4E7C2;border-color:var(--gold-d);padding:20px 22px 22px;text-align:left;margin:0 6px}
-.hero::after{ /* lengkungan pintu masjid di kanan atas */
+.hero::after{
   content:'';position:absolute;right:22px;top:10px;width:86px;height:110px;
   border:2px solid var(--gold);border-bottom:0;border-radius:50% 50% 0 0/70% 70% 0 0;opacity:.8;
   background:linear-gradient(180deg,rgba(227,205,151,.12),transparent)}
-.hero::before{ /* kubah kecil */
+.hero::before{
   content:'';position:absolute;right:58px;top:0;width:24px;height:22px;border-radius:50% 50% 0 0;
   border:2px solid var(--gold);border-bottom:0;opacity:.8}
 .hero small{display:block;opacity:.9;font-size:14px;color:#EED9A2}
@@ -93,7 +87,6 @@ h2::after{background:linear-gradient(270deg,transparent,var(--gold))}
 .hero .big{font-family:'Amiri',Georgia,serif;font-size:clamp(40px,11vw,56px);font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums;color:#FFF3D0;margin:4px 0 2px;text-shadow:0 2px 0 rgba(0,0,0,.2)}
 #hij{font-size:13px;opacity:.85}
 
-/* daftar waktu sholat: baris bergaya pill berbingkai emas */
 #jd{padding:8px;display:flex;flex-direction:column;gap:6px}
 .row{display:flex;justify-content:space-between;align-items:center;min-height:50px;padding:0 20px;border:1px solid var(--gold);border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.55),rgba(227,205,151,.18) 50%,rgba(255,255,255,.55));font-size:17px;color:var(--ink)}
 .row b{font-variant-numeric:tabular-nums;font-weight:700;color:var(--gold-d)}
@@ -104,21 +97,18 @@ h2::after{background:linear-gradient(270deg,transparent,var(--gold))}
 #res{margin-top:10px;padding:8px;display:flex;flex-direction:column;gap:6px}
 #res .row{cursor:pointer;min-height:48px}
 
-/* badge libur */
 .tag{display:inline-block;padding:3px 12px;border-radius:99px;background:var(--green);color:#F4E7C2;font-size:12px;font-weight:700;letter-spacing:.04em}
 
-/* ===== Kontrol ===== */
 .btn{min-height:46px;min-width:44px;padding:0 22px;border:1px solid var(--gold-d);border-radius:999px;background:linear-gradient(180deg,#17604A,var(--green-d));color:#F4E7C2;font-weight:700;letter-spacing:.03em;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 4px 10px rgba(8,54,40,.25)}
 .btn:active{opacity:.85;transform:scale(.98)}
 .btn.gray{background:linear-gradient(180deg,#FFF8E6,#EFDFB5);color:var(--green-d);border-color:var(--gold);box-shadow:0 2px 6px rgba(90,64,20,.15)}
 .btn.full{width:100%}
 .btn.sm{min-height:38px;padding:0 16px;font-size:14px}
 .gap{display:flex;gap:10px;margin:14px 6px 0}.gap .btn{flex:1}
-input{width:100%;min-height:48px;border-radius:999px;border:1px solid var(--gold);background:#FFFCF2;padding:0 48px 0 18px;outline:0;color:var(--ink);font-size:16px;box-shadow:inset 0 2px 4px rgba(90,64,20,.08)}
-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(14,75,57,.15)}
+input,select{width:100%;min-height:48px;border-radius:999px;border:1px solid var(--gold);background:#FFFCF2;padding:0 48px 0 18px;outline:0;color:var(--ink);font-size:16px;box-shadow:inset 0 2px 4px rgba(90,64,20,.08)}
+input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(14,75,57,.15)}
 input::placeholder{color:#A8996F}
 
-/* switch emas */
 .sw{position:relative;width:52px;height:30px;flex:none}
 .sw input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;opacity:0;z-index:1;cursor:pointer;padding:0}
 .sw s{position:absolute;inset:0;background:#E8DCC0;border:1px solid var(--gold);border-radius:99px;transition:.2s}
@@ -126,7 +116,6 @@ input::placeholder{color:#A8996F}
 .sw input:checked+s{background:var(--green);border-color:var(--green-d)}
 .sw input:checked+s:after{transform:translateX(22px)}
 
-/* panel lokasi */
 .loc-panel{padding:6px 0 0}
 .loc-panel .row{border-radius:0;border:0;border-bottom:1px solid rgba(184,146,74,.35);background:none;padding:0 18px;min-height:52px;box-shadow:none}
 .loc-panel .row:last-child{border:0}
@@ -135,7 +124,6 @@ input::placeholder{color:#A8996F}
 .search-wrap .icon-btn{position:absolute;right:24px;top:50%;transform:translateY(-50%);margin-top:7px;width:38px;height:38px;border-radius:50%;border:1px solid var(--gold-d);background:radial-gradient(circle at 35% 30%,#1C6B53,var(--green-d));color:#F4E7C2;display:grid;place-items:center;cursor:pointer;pointer-events:none}
 .search-wrap .icon-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 
-/* ===== Kiblat ===== */
 #s-qibla .card{padding:26px 22px 24px;text-align:center;background:linear-gradient(180deg,#FBF3DC,#F3E4BC);border-radius:4px 4px 18px 18px;border-top-left-radius:110px 110px;border-top-right-radius:110px 110px;border-color:var(--gold-d);margin:0 auto;max-width:440px}
 .cmp{width:min(270px,72vw);aspect-ratio:1;margin:12px auto 6px;border-radius:50%;position:relative;
   background:radial-gradient(circle,#FFFBEF 0 55%,#EBD9A8 56%,#D9BE7E 70%,#B8924A 100%);
@@ -148,14 +136,33 @@ input::placeholder{color:#A8996F}
 #deg{font-family:'Amiri',Georgia,serif;font-size:36px;font-weight:700;color:var(--green-d);margin-top:8px}
 #s-qibla .meta{font-size:15px}
 
-/* ===== Quran & Hadis ===== */
 #qr,#hd{padding:22px 20px;background:linear-gradient(180deg,#FBF3DC,#F5E9C8);border-radius:18px}
 .ar{font-size:clamp(26px,6vw,32px);line-height:2.1;text-align:right;direction:rtl;font-family:'Amiri','Traditional Arabic','Noto Naskh Arabic',serif;color:var(--green-d)}
 .tr{line-height:1.7;margin-top:12px;font-size:16px;color:var(--ink);padding-top:12px;border-top:1px dashed rgba(184,146,74,.6)}
 .err{color:var(--rd);padding:16px;text-align:center}
 .sec{display:none}.sec.on{display:block}
 
-/* ===== Navigasi ===== */
+/* ===== Al-Quran ===== */
+#qr{padding:0}#qr .ay{border:0}
+.seg{display:flex;gap:6px;margin:16px 6px 14px;overflow-x:auto;padding:2px}
+.seg button{flex:1;min-height:44px;padding:0 14px;border:1px solid var(--gold);border-radius:999px;background:linear-gradient(180deg,#FFF8E6,#EFDFB5);color:var(--green-d);font-weight:700;cursor:pointer;white-space:nowrap}
+.seg button.on{background:linear-gradient(180deg,#17604A,var(--green-d));color:#F4E7C2;border-color:var(--gold-d)}
+.sr{display:flex;align-items:center;gap:12px;min-height:62px;padding:8px 16px;border-bottom:1px solid rgba(184,146,74,.35);cursor:pointer}
+.sr:last-child{border:0}.sr:active{background:rgba(14,75,57,.08)}
+.sn{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1.5px solid var(--gold);border-radius:50%;font-weight:700;color:var(--gold-d);font-size:14px;background:#FFF8E6}
+.sr .t{flex:1;min-width:0}.sr .t b{display:block;font-size:17px}.sr .t small{color:var(--mu);font-size:13px}
+.sr .ar{font-size:24px;line-height:1.4}
+.ay{padding:16px 18px;border-bottom:1px dashed rgba(184,146,74,.6)}.ay:last-child{border:0}
+.ay-h{display:flex;align-items:center;gap:8px;margin-bottom:4px}.ay-h .sn{width:34px;height:34px;font-size:13px}.ay-h .sp{flex:1;font-size:14px}
+.ib{min-width:44px;min-height:44px;border:1px solid var(--gold);border-radius:50%;background:#FFF8E6;color:var(--green-d);cursor:pointer;font-size:16px}
+.ib.on{background:var(--green);color:#F4E7C2}
+details{margin-top:10px;border:1px solid rgba(184,146,74,.5);border-radius:14px;padding:0 14px;background:rgba(255,255,255,.4)}
+details summary{min-height:44px;display:flex;align-items:center;font-weight:700;color:var(--gold-d);cursor:pointer}
+details p{padding-bottom:12px;line-height:1.7;font-size:15px}
+.rd-h{text-align:center;padding:20px}.rd-h .ar{text-align:center;font-size:36px;line-height:1.6}
+.sel{display:flex;gap:8px}.sel select,.sel input{flex:1;min-width:0;padding:0 16px}
+#qsl:empty,#qsr:empty,#qsj:empty,#qay:empty{display:none}
+
 nav{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;height:calc(var(--nav) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);
   background:linear-gradient(180deg,#FBF4E0,#F1E4C0);border-top:1.5px solid var(--gold);box-shadow:0 -6px 18px rgba(90,64,20,.12)}
 nav button{flex:1;border:0;background:none;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;cursor:pointer;position:relative}
@@ -192,7 +199,6 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;st
 </head>
 <body>
 
-<!-- ornamen dekoratif -->
 <div class="deco mandala m-l" aria-hidden="true"></div>
 <div class="deco mandala m-r" aria-hidden="true"></div>
 <div class="frame-line" style="left:92px" aria-hidden="true"></div>
@@ -249,9 +255,43 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;st
 </section>
 
 <section class="sec" id="s-quran">
- <h1>Ayat Acak</h1>
- <div class="card" id="qr"><span class="mu">Memuat…</span></div>
- <div class="gap"><button class="btn full" onclick="loadQ()">Ayat lain</button></div>
+ <h1>Al-Quran</h1>
+ <div id="qv-menu">
+  <h2>Ayat Acak</h2>
+  <div class="card" id="qr"><span class="mu">Memuat…</span></div>
+  <div class="gap"><button class="btn gray full" onclick="loadQ()">Ayat lain</button></div>
+  <div class="seg" id="qseg"><button data-m="surat" class="on">Surat</button><button data-m="jelajah">Jelajah</button><button data-m="cari">Cari</button><button data-m="sajdah">Sajdah</button></div>
+  <div id="qp-surat">
+   <div id="qlast"></div>
+   <div class="card pad" style="padding:12px 14px"><input id="qf" placeholder="Cari surat, mis. kahfi" autocomplete="off"></div>
+   <div class="card" id="qsl" style="margin-top:10px"></div>
+  </div>
+  <div id="qp-jelajah" style="display:none">
+   <div class="card pad">
+    <div class="sel"><select id="qt"></select><input id="qnum" type="number" inputmode="numeric" min="1" placeholder="Nomor"></div>
+    <div class="gap" style="margin:12px 0 0"><button class="btn full" id="qgo">Buka</button></div>
+    <div class="meta" id="qhint">Baca per juz, halaman mushaf, manzil, ruku, atau hizb.</div>
+   </div>
+  </div>
+  <div id="qp-cari" style="display:none">
+   <div class="card pad" style="padding:12px 14px"><input id="qs" placeholder="Kata kunci (min. 3 huruf), mis. sabar" autocomplete="off"></div>
+   <div class="gap"><button class="btn full" id="qsb">Cari ayat</button></div>
+   <div class="meta" id="qss"></div>
+   <div class="card" id="qsr" style="margin-top:10px"></div>
+   <div class="gap" style="justify-content:center"><button class="btn" id="qsm" style="display:none;flex:none">Muat lagi</button></div>
+  </div>
+  <div id="qp-sajdah" style="display:none">
+   <div class="meta" id="qjs" style="margin:0 0 10px"></div>
+   <div class="card" id="qsj"></div>
+  </div>
+ </div>
+ <div id="qv-read" style="display:none">
+  <div class="gap" style="margin:0 6px 12px"><button class="btn gray sm" id="qback" style="flex:none">‹ Kembali</button></div>
+  <div class="card rd-h" id="qhead"></div>
+  <div class="card" id="qay" style="margin-top:14px"></div>
+  <div class="meta" id="qst"></div>
+  <div class="gap" style="justify-content:center"><button class="btn" id="qmore" style="display:none;flex:none">Muat lagi</button></div>
+ </div>
 </section>
 
 <section class="sec" id="s-hadis">
@@ -272,7 +312,8 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;st
 const API='https://api.myquran.com/v3',$=id=>document.getElementById(id),LS=localStorage;
 const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const TZ=Intl.DateTimeFormat().resolvedOptions().timeZone||'Asia/Jakarta';
-async function api(p,opt){const k='c:'+p;try{const r=await fetch(API+p,opt);if(!r.ok)throw 0;const j=await r.json();if(!opt)LS[k]=JSON.stringify({d:new Date().toDateString(),j});return j}catch(e){const c=LS[k];if(c)return JSON.parse(c).j;throw e}}
+/* Cache offline hanya untuk data kecil; ayat/tafsir tidak disimpan agar kuota localStorage aman */
+async function api(p,opt){const k='c:'+p,ca=!opt&&!/^\/quran\/(?!random)/.test(p);try{const r=await fetch(API+p,opt);if(!r.ok)throw 0;const j=await r.json();if(ca)try{LS[k]=JSON.stringify({d:new Date().toDateString(),j})}catch(e){}return j}catch(e){const c=ca&&LS[k];if(c)return JSON.parse(c).j;throw e}}
 /* PWA: manifest + ikon dibuat otomatis dari satu file */
 (function(){const mk=n=>{const c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,n,n);g.addColorStop(0,'#0E4B39');g.addColorStop(1,'#136048');x.fillStyle=g;x.fillRect(0,0,n,n);x.fillStyle='#E3CD97';x.beginPath();x.arc(n/2,n*.56,n*.3,Math.PI,0);x.lineTo(n*.7,n*.82);x.lineTo(n*.3,n*.82);x.fill();x.fillStyle='#0E4B39';x.beginPath();x.arc(n/2,n*.56,n*.12,Math.PI,0);x.lineTo(n*.62,n*.82);x.lineTo(n*.38,n*.82);x.fill();return c.toDataURL('image/png')};
 const i192=mk(192),i512=mk(512);$('ati').href=i512;
@@ -322,10 +363,51 @@ $('det').onclick=()=>{setAuto(true);detect()};
 /* Kalender + libur */
 (async()=>{try{const r=await api('/cal/today?tz='+encodeURIComponent(TZ)),d=r.data;$('hij').textContent=`${d.hijr.today||d.hijr.day+' '+d.hijr.monthName+' '+d.hijr.year} H · ${d.ce.today}`}catch(e){}
  try{const r=await api('/cal/holidays/today'),d=r.data;const t=d&&(d.name||d.title||(Array.isArray(d)&&d[0]&&(d[0].name||d[0].title)));if(t)$('hol').innerHTML=`<h2>Hari libur</h2><div class="card pad" style="text-align:center"><span class="tag">LIBUR</span> &nbsp;${esc(t)}</div>`}catch(e){}})();
-/* Quran */
-async function loadQ(){$('qr').innerHTML='<div class="pad"><span class="mu">Memuat…</span></div>';try{const d=(await api('/quran/random')).data;
- $('qr').innerHTML=`<div class="pad"><div class="ar">${esc(d.arab)}</div><div class="tr">${esc(d.translation)}</div><div class="meta">QS ${d.surah_number}:${d.ayah_number}${d.meta&&d.meta.juz?' · Juz '+d.meta.juz:''}</div>${d.audio_url?`<div class="gap" style="margin:14px 0 0"><button class="btn gray" id="pl">▶ Putar audio</button></div>`:''}</div>`;
- if(d.audio_url){const a=new Audio(d.audio_url);$('pl').onclick=()=>a.paused?a.play():a.pause()}}catch(e){$('qr').innerHTML='<div class="err">Gagal memuat ayat.</div>'}}
+
+/* ===== Al-Quran: surat, jelajah (juz/halaman/manzil/ruku/hizb), cari, sajdah, tafsir, audio, penanda ===== */
+const LIM=20,NS={juz:['Juz',30],page:['Halaman',604],manzil:['Manzil',7],ruku:['Ruku',558],hizb:['Hizb',240]};
+let SUR=null,QL=JSON.parse(LS.qlast||'null'),RD=null,SP=null,sjd=0,abtn=null;const aud=new Audio();
+const getSur=async()=>SUR||(SUR=(await api('/quran')).data);
+const sname=n=>{const s=(SUR||[]).find(x=>x.number==n);return s?s.name_latin:'Surat '+n};
+const nl=t=>esc(t).replace(/\n/g,'<br>');
+function ayHtml(a){const t=a.tafsir||{},k=t.kemenag||{},sj=a.meta&&a.meta.sajda,sn=(a.surah&&a.surah.name_latin)||sname(a.surah_number);
+ const tf=(l,x)=>x?`<details><summary>${l}</summary><p>${nl(x)}</p></details>`:'';
+ return `<div class="ay" data-s="${a.surah_number}" data-a="${a.ayah_number}"><div class="ay-h"><div class="sn">${a.ayah_number}</div><span class="sp mu">${esc(sn)}:${a.ayah_number}${a.meta&&a.meta.juz?' · Juz '+a.meta.juz:''}${sj&&(sj.recommended||sj.obligatory)?' <span class="tag">SAJDAH</span>':''}</span>${a.audio_url?`<button class="ib" data-au="${esc(a.audio_url)}" aria-label="Putar audio">▶</button>`:''}<button class="ib bm${QL&&QL.s==a.surah_number&&QL.a==a.ayah_number?' on':''}" aria-label="Tandai terakhir dibaca">🔖</button></div><div class="ar">${esc(a.arab)}</div><div class="tr">${esc(a.translation)}</div>${tf('Tafsir Kemenag',k.long||k.short)}${tf('Tafsir Quraish Shihab',t.quraish)}${tf('Tafsir Jalalayn',t.jalalayn)}</div>`}
+function bindAu(r){r.querySelectorAll('[data-au]:not([data-b])').forEach(b=>{b.dataset.b=1;b.dataset.l=b.textContent;b.onclick=()=>{if(abtn===b&&!aud.paused){aud.pause();return}if(abtn)abtn.textContent=abtn.dataset.l;abtn=b;aud.src=b.dataset.au;aud.play().catch(()=>{})}})}
+aud.onplay=()=>{if(abtn)abtn.textContent='⏸'};aud.onpause=aud.onended=()=>{if(abtn)abtn.textContent=abtn.dataset.l};
+function bindAy(r){bindAu(r);r.querySelectorAll('.bm:not([data-b])').forEach(b=>{b.dataset.b=1;b.onclick=()=>{const p=b.closest('.ay');QL={s:+p.dataset.s,a:+p.dataset.a};LS.qlast=JSON.stringify(QL);document.querySelectorAll('.bm').forEach(x=>x.classList.remove('on'));b.classList.add('on')}})}
+/* ayat acak */
+async function loadQ(){$('qr').innerHTML='<div class="pad"><span class="mu">Memuat…</span></div>';try{const d=(await api('/quran/random')).data;await getSur().catch(()=>{});$('qr').innerHTML=ayHtml(d);bindAy($('qr'))}catch(e){$('qr').innerHTML='<div class="err">Gagal memuat ayat.</div>'}}
+/* mode */
+function qMode(m){document.querySelectorAll('#qseg button').forEach(b=>b.classList.toggle('on',b.dataset.m==m));['surat','jelajah','cari','sajdah'].forEach(x=>$('qp-'+x).style.display=x==m?'block':'none');if(m=='surat')renderSur();if(m=='sajdah')loadSajda()}
+document.querySelectorAll('#qseg button').forEach(b=>b.onclick=()=>qMode(b.dataset.m));
+async function renderSur(){try{await getSur();drawSur();$('qlast').innerHTML=QL?`<div class="gap" style="margin:0 6px 12px"><button class="btn gray full" id="ql">🔖 Lanjutkan: ${esc(sname(QL.s))} ayat ${QL.a}</button></div>`:'';if(QL)$('ql').onclick=()=>openSur(QL.s,Math.ceil(QL.a/LIM))}catch(e){$('qsl').innerHTML='<div class="err">Gagal memuat daftar surat.</div>'}}
+function drawSur(){const f=$('qf').value.trim().toLowerCase(),L=SUR.filter(s=>!f||(s.number+' '+s.name_latin+' '+s.translation).toLowerCase().includes(f));
+ $('qsl').innerHTML=L.map(s=>`<div class="sr" data-n="${s.number}"><div class="sn">${s.number}</div><div class="t"><b>${esc(s.name_latin)}</b><small>${esc(s.translation)} · ${esc(s.revelation)} · ${s.number_of_ayahs} ayat</small></div><div class="ar">${esc(s.name)}</div></div>`).join('')||'<div class="pad mu">Tidak ditemukan.</div>';
+ $('qsl').querySelectorAll('.sr').forEach(el=>el.onclick=()=>openSur(+el.dataset.n))}
+$('qf').oninput=()=>SUR&&drawSur();
+/* pembaca */
+async function openSur(n,pg){await getSur().catch(()=>{});const s=(SUR||[]).find(x=>x.number==n)||{};
+ openList(`/quran/${n}`,`<div class="ar">${esc(s.name||'')}</div><b style="font-size:20px">${esc(s.name_latin||'Surat '+n)}</b><div class="meta" style="margin-top:4px">${esc(s.translation||'')} · ${esc(s.revelation||'')} · ${s.number_of_ayahs||''} ayat</div>${s.audio_url?`<div class="gap" style="justify-content:center"><button class="btn gray sm" data-au="${esc(s.audio_url)}" style="flex:none">▶ Audio surat</button></div>`:''}`,pg)}
+function openList(path,head,pg){RD={path,pg:pg||1};$('qv-menu').style.display='none';$('qv-read').style.display='block';$('qhead').innerHTML=head;bindAu($('qhead'));$('qay').innerHTML='';scrollTo(0,0);loadMore()}
+async function loadMore(){$('qmore').style.display='none';$('qst').textContent='Memuat…';
+ try{const d=(await api(`${RD.path}?page=${RD.pg}&limit=${LIM}`)).data,A=Array.isArray(d)?d:(d.ayahs||d.items||[]);await getSur().catch(()=>{});
+  $('qay').insertAdjacentHTML('beforeend',A.map(ayHtml).join(''));bindAy($('qay'));$('qst').textContent=A.length?'':'Tidak ada ayat.';if(A.length>=LIM){RD.pg++;$('qmore').style.display='inline-block'}}
+ catch(e){$('qst').innerHTML='<span class="err">Gagal memuat. Periksa koneksi.</span>'}}
+$('qmore').onclick=loadMore;
+$('qback').onclick=()=>{aud.pause();$('qv-read').style.display='none';$('qv-menu').style.display='block';scrollTo(0,0)};
+/* jelajah */
+$('qt').innerHTML=Object.entries(NS).map(([k,v])=>`<option value="${k}">${v[0]} (1–${v[1]})</option>`).join('');
+$('qgo').onclick=()=>{const t=$('qt').value,n=+$('qnum').value,m=NS[t][1];if(!(n>=1&&n<=m)){$('qhint').textContent=`Masukkan angka 1–${m}.`;return}$('qhint').textContent='';openList(`/quran/${t}/${n}`,`<b style="font-size:22px">${NS[t][0]} ${n}</b>`)};
+/* cari */
+async function qSearch(more){const k=$('qs').value.trim();if(!more){if(k.length<3){$('qss').textContent='Minimal 3 huruf.';return}SP={k,pg:1};$('qsr').innerHTML=''}
+ $('qss').textContent='Mencari…';$('qsm').style.display='none';
+ try{const A=(await api('/quran/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({keyword:SP.k,page:SP.pg,limit:LIM})})).data||[];await getSur().catch(()=>{});
+  $('qsr').insertAdjacentHTML('beforeend',A.map(ayHtml).join(''));bindAy($('qsr'));$('qss').textContent=A.length||SP.pg>1?'':'Tidak ditemukan.';if(A.length>=LIM){SP.pg++;$('qsm').style.display='inline-block'}}
+ catch(e){$('qss').innerHTML='<span class="err">Gagal mencari. Periksa koneksi.</span>'}}
+$('qsb').onclick=()=>qSearch();$('qsm').onclick=()=>qSearch(true);$('qs').onkeydown=e=>{if(e.key=='Enter')qSearch()};
+/* sajdah */
+async function loadSajda(){if(sjd)return;$('qjs').textContent='Memuat…';try{await getSur().catch(()=>{});const d=(await api('/quran/sajda')).data,A=Array.isArray(d)?d:(d.ayahs||[]);$('qsj').innerHTML=A.map(ayHtml).join('');bindAy($('qsj'));$('qjs').textContent=A.length+' ayat sajdah';sjd=1}catch(e){$('qjs').innerHTML='<span class="err">Gagal memuat.</span>'}}
 async function loadH(){$('hd').innerHTML='<div class="pad"><span class="mu">Memuat…</span></div>';try{const r=await api('/hadis/enc/random'),d=r.data;
  $('hd').innerHTML=`<div class="pad"><div class="ar">${esc(d.text.ar)}</div><div class="tr">${esc(d.text.id)}</div><div class="meta">${d.grade?`<span class="tag">${esc(d.grade)}</span> `:''}${esc(d.takhrij||'')}</div></div>`}catch(e){$('hd').innerHTML='<div class="err">Gagal memuat hadis.</div>'}}
 /* Kiblat */
@@ -336,7 +418,7 @@ $('qb').onclick=async()=>{$('qm').textContent='Mengambil lokasi…';
  try{if(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission)await DeviceOrientationEvent.requestPermission()}catch(e){}
  addEventListener('deviceorientationabsolute',onOri,true);addEventListener('deviceorientation',onOri,true);
  navigator.geolocation.getCurrentPosition(async p=>{try{const r=await api(`/qibla/${p.coords.latitude},${p.coords.longitude}`);qd=r.data.direction;$('deg').textContent=qd.toFixed(1)+'°';$('qm').textContent='Putar HP hingga jarum merah lurus ke atas.';rot()}catch(e){$('qm').textContent='Gagal menghitung kiblat.'}},()=>$('qm').textContent='Izin lokasi ditolak.',{enableHighAccuracy:true})};
-setAuto(LS.auto!=='0');loadJ();if(LS.auto!=='0')detect();loadQ();loadH();
+setAuto(LS.auto!=='0');loadJ();if(LS.auto!=='0')detect();loadQ();loadH();renderSur();
 </script>
 </body>
 </html>
