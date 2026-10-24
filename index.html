@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muslim Widget</title>
+<meta name="theme-color" content="#F2F2F7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Muslim">
+<link rel="apple-touch-icon" id="ati" href="">
+<style>
+:root{--bg:#F2F2F7;--card:#fff;--tx:#000;--mu:#8E8E93;--ac:#007AFF;--rd:#FF3B30;--gn:#34C759;--ln:rgba(0,0,0,.08);--g:12px;--nav:64px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0}
+html,body{height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',sans-serif;background:var(--bg);color:var(--tx);font-size:15px;padding:env(safe-area-inset-top) 0 0}
+button,input{font:inherit;transition:.2s ease}
+main{padding:var(--g);padding-bottom:calc(var(--nav) + var(--g) + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
+h1{font-size:clamp(26px,6vw,32px);font-weight:700;margin:8px 4px 14px}
+h2{font-size:12px;text-transform:uppercase;color:var(--mu);letter-spacing:.04em;margin:18px 16px 6px;font-weight:600}
+.card{background:var(--card);border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid var(--ln);overflow:hidden}
+.pad{padding:16px}
+.hero{background:linear-gradient(145deg,#007AFF,#5AC8FA);color:#fff;border:0}
+.hero small{opacity:.85;font-size:13px}
+.hero .big{font-size:clamp(34px,10vw,48px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.row{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:0 16px;border-bottom:.5px solid var(--ln)}
+.row:last-child{border:0}
+.row.on{background:rgba(0,122,255,.08);color:var(--ac);font-weight:600}
+.row b{font-variant-numeric:tabular-nums;font-weight:600}
+.btn{min-height:44px;min-width:44px;padding:0 20px;border:0;border-radius:22px;background:var(--ac);color:#fff;font-weight:600;cursor:pointer}
+.btn:active{opacity:.7;transform:scale(.97)}
+.btn.gray{background:rgba(120,120,128,.14);color:var(--ac)}
+.btn.full{width:100%}
+input{width:100%;min-height:44px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);padding:0 14px;outline:0}
+input:focus{border-color:var(--ac)}
+.ar{font-size:clamp(22px,5.5vw,28px);line-height:2;text-align:right;direction:rtl;font-family:'Traditional Arabic','Noto Naskh Arabic',serif}
+.tr{line-height:1.55;margin-top:8px}
+.meta{color:var(--mu);font-size:13px;margin-top:10px}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:rgba(52,199,89,.15);color:#1f9d44;font-size:12px;font-weight:600}
+.sec{display:none}.sec.on{display:block}
+.err{color:var(--rd);padding:16px;text-align:center}
+.mu{color:var(--mu)}
+.gap{display:flex;gap:10px;margin-top:12px}.gap .btn{flex:1}
+.res .row{cursor:pointer;min-height:48px}
+.sw{position:relative;width:51px;height:31px;flex:none}.sw input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;opacity:0;z-index:1;cursor:pointer;padding:0}
+.sw s{position:absolute;inset:0;background:rgba(120,120,128,.32);border-radius:99px;transition:.2s}
+.sw s:after{content:'';position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:.2s}
+.sw input:checked+s{background:var(--gn)}.sw input:checked+s:after{transform:translateX(20px)}
+.btn.sm{min-height:36px;padding:0 14px;font-size:14px}
+/* compass */
+.cmp{width:min(260px,70vw);aspect-ratio:1;margin:10px auto;border-radius:50%;border:1px solid var(--ln);position:relative;background:#fff;box-shadow:inset 0 0 0 10px var(--bg)}
+.cmp i{position:absolute;left:50%;top:8%;width:4px;height:42%;margin-left:-2px;background:var(--rd);border-radius:4px;transform-origin:50% 100%;transition:transform .3s}
+.cmp em{position:absolute;inset:0;font-style:normal;text-align:center;font-size:13px;color:var(--mu);padding-top:3px}
+.cmp span{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--tx)}
+/* nav: bottom tab bar on mobile */
+nav{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;height:calc(var(--nav) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:.5px solid var(--ln)}
+nav button{flex:1;border:0;background:none;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;cursor:pointer}
+nav button.on{color:var(--ac)}
+nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(min-width:768px){:root{--g:20px}
+ nav{top:0;bottom:auto;right:auto;width:76px;height:100%;flex-direction:column;justify-content:flex-start;padding:calc(20px + env(safe-area-inset-top)) 0;border-top:0;border-right:.5px solid var(--ln)}
+ nav button{flex:0 0 64px}nav button span{display:none}
+ main{margin-left:76px;padding-bottom:var(--g);max-width:none}main>div{max-width:720px;margin:0 auto}}
+@media(min-width:1025px){:root{--g:24px;font-size:14px}body{font-size:14px}
+ nav{width:220px;align-items:stretch;padding-left:12px;padding-right:12px}
+ nav button{flex:0 0 44px;flex-direction:row;justify-content:flex-start;gap:12px;padding:0 14px;border-radius:12px;font-size:15px}
+ nav button span{display:inline}nav button.on{background:rgba(0,122,255,.1)}
+ main{margin-left:220px}}
+</style>
+</head>
+<body>
+<main><div>
+<section class="sec on" id="s-home">
+ <h1>Jadwal Sholat</h1>
+ <div class="card hero pad">
+  <small id="loc">Pilih kota…</small>
+  <div style="margin-top:6px"><small id="nx">Sholat berikutnya</small></div>
+  <div class="big" id="cd">--:--:--</div>
+  <small id="hij"></small>
+ </div>
+ <h2>Hari ini</h2>
+ <div class="card" id="jd"><div class="pad mu">Memuat…</div></div>
+ <div id="hol"></div>
+ <h2>Lokasi</h2>
+ <div class="card">
+  <div class="row"><span>Deteksi otomatis</span><label class="sw"><input type="checkbox" id="auto" aria-label="Deteksi otomatis"><s></s></label></div>
+  <div class="row"><span class="mu" id="am" style="font-size:13px">Manual</span><button class="btn gray sm" id="det">Deteksi sekarang</button></div>
+  <div style="padding:12px 16px 16px"><input id="q" placeholder="Atau cari manual, mis. depok" autocomplete="off"></div>
+ </div>
+ <div class="card res" id="res" style="margin-top:10px;display:none"></div>
+</section>
+<section class="sec" id="s-qibla">
+ <h1>Arah Kiblat</h1>
+ <div class="card pad" style="text-align:center">
+  <div class="cmp"><em>U</em><i id="nd"></i><span></span></div>
+  <div class="big" id="deg" style="font-size:34px;font-weight:700">—</div>
+  <div class="meta" id="qm">Tekan tombol untuk memakai lokasi &amp; kompas HP.</div>
+  <div class="gap"><button class="btn" id="qb">Gunakan Lokasi</button></div>
+ </div>
+</section>
+<section class="sec" id="s-quran">
+ <h1>Ayat Acak</h1>
+ <div class="card pad" id="qr"><span class="mu">Memuat…</span></div>
+ <div class="gap"><button class="btn full" onclick="loadQ()">Ayat lain</button></div>
+</section>
+<section class="sec" id="s-hadis">
+ <h1>Hadis Acak</h1>
+ <div class="card pad" id="hd"><span class="mu">Memuat…</span></div>
+ <div class="gap"><button class="btn full" onclick="loadH()">Hadis lain</button></div>
+</section>
+</div></main>
+<nav id="nav">
+ <button data-t="home" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Sholat</span></button>
+ <button data-t="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Kiblat</span></button>
+ <button data-t="quran"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 19V5M9 7h6"/></svg><span>Quran</span></button>
+ <button data-t="hadis"><svg viewBox="0 0 24 24"><path d="M5 4h14v16l-7-4-7 4z"/></svg><span>Hadis</span></button>
+</nav>
+<script>
+const API='https://api.myquran.com/v3',$=id=>document.getElementById(id),LS=localStorage;
+const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const TZ=Intl.DateTimeFormat().resolvedOptions().timeZone||'Asia/Jakarta';
+async function api(p,opt){const k='c:'+p;try{const r=await fetch(API+p,opt);if(!r.ok)throw 0;const j=await r.json();if(!opt)LS[k]=JSON.stringify({d:new Date().toDateString(),j});return j}catch(e){const c=LS[k];if(c)return JSON.parse(c).j;throw e}}
+/* PWA: manifest + ikon dibuat otomatis dari satu file */
+(function(){const mk=n=>{const c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,n,n);g.addColorStop(0,'#007AFF');g.addColorStop(1,'#5AC8FA');x.fillStyle=g;x.fillRect(0,0,n,n);x.fillStyle='#fff';x.beginPath();x.arc(n*.52,n/2,n*.27,0,7);x.fill();x.fillStyle=g;x.beginPath();x.arc(n*.6,n*.46,n*.24,0,7);x.fill();x.fillStyle='#fff';x.font=n*.2+'px serif';x.fillText('★',n*.58,n*.55);return c.toDataURL('image/png')};
+const i192=mk(192),i512=mk(512);$('ati').href=i512;
+const u=location.href.split('#')[0];
+const m={name:'Muslim Widget',short_name:'Muslim',start_url:u,scope:u.replace(/[^/]*$/,''),display:'standalone',background_color:'#F2F2F7',theme_color:'#F2F2F7',lang:'id',icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
+const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(l);
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))})();
+/* Tabs */
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.sec').forEach(e=>e.classList.remove('on'));b.classList.add('on');$('s-'+b.dataset.t).classList.add('on');scrollTo(0,0)});
+/* Sholat */
+let times=null,city=JSON.parse(LS.city||'null');
+const PR=[['imsak','Imsak'],['subuh','Subuh'],['terbit','Terbit'],['dhuha','Dhuha'],['dzuhur','Dzuhur'],['ashar','Ashar'],['maghrib','Maghrib'],['isya','Isya']],MAIN=['subuh','dzuhur','ashar','maghrib','isya'];
+async function loadJ(){if(!city){$('jd').innerHTML='<div class="pad mu">Cari dan pilih kota Anda di bawah.</div>';return}
+ $('loc').textContent=city.lokasi;
+ try{const r=await api(`/sholat/jadwal/${city.id}/today?tz=${encodeURIComponent(TZ)}`),j=r.data.jadwal;times=j.subuh?j:Object.values(j)[0];$('loc').textContent=(r.data.kabko||city.lokasi)+' · '+(r.data.prov||'');tick()}
+ catch(e){$('jd').innerHTML='<div class="err">Gagal memuat jadwal. Periksa koneksi.</div>'}}
+function tick(){if(!times)return;const now=new Date(),n=now.getHours()*3600+now.getMinutes()*60+now.getSeconds();
+ const s=t=>{const[a,b]=t.split(':');return a*3600+b*60};let nx=MAIN.find(k=>s(times[k])>n),add=0;if(!nx){nx='subuh';add=86400}
+ const d=s(times[nx])+add-n,f=v=>String(v).padStart(2,'0');
+ $('cd').textContent=`${f(d/3600|0)}:${f(d%3600/60|0)}:${f(d%60)}`;
+ $('nx').textContent='Menuju '+PR.find(p=>p[0]==nx)[1]+' · '+times[nx];
+ $('jd').innerHTML=PR.map(([k,l])=>`<div class="row ${k==nx?'on':''}"><span>${l}</span><b>${esc(times[k])}</b></div>`).join('')}
+setInterval(tick,1000);
+function showRes(L,msg){const r=$('res');r.style.display='block';
+ r.innerHTML=(msg?`<div class="pad mu" style="font-size:13px">${msg}</div>`:'')+(L.length?L.map((c,i)=>`<div class="row" data-i="${i}">${esc(c.lokasi)}</div>`).join(''):'<div class="pad mu">Tidak ditemukan.</div>');
+ r.querySelectorAll('.row[data-i]').forEach(el=>el.onclick=()=>{setAuto(false);pick(L[el.dataset.i])})}
+function pick(c){city=c;LS.city=JSON.stringify(c);$('res').style.display='none';$('q').value='';loadJ()}
+$('q').oninput=e=>{clearTimeout(window.dt);const v=e.target.value.trim();if(v.length<3){$('res').style.display='none';return}
+ dt=setTimeout(async()=>{try{showRes((await api('/sholat/kabkota/cari/'+encodeURIComponent(v))).data||[])}catch(e){$('res').style.display='block';$('res').innerHTML='<div class="err">Gagal mencari.</div>'}},350)};
+/* Lokasi otomatis: GPS -> nama wilayah (OSM) -> cocokkan ke daftar kab/kota Kemenag */
+const setAuto=v=>{LS.auto=v?'1':'0';$('auto').checked=v;$('am').textContent=v?'Otomatis (GPS)':'Manual'};
+const core=s=>s.toUpperCase().replace(/^(KOTA|KABUPATEN|KAB\.?)\s+/,'').replace(/\s+(CITY|REGENCY)$/,'').trim();
+async function detect(){const am=$('am');am.textContent='Mendeteksi lokasi…';
+ try{if(!navigator.geolocation)throw {m:'Perangkat tidak mendukung GPS.'};
+  const p=await new Promise((ok,no)=>navigator.geolocation.getCurrentPosition(ok,no,{timeout:12000,maximumAge:600000}));
+  let a={};try{const g=await(await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&accept-language=id&lat=${p.coords.latitude}&lon=${p.coords.longitude}`)).json();a=g.address||{}}catch(e){throw {m:'Gagal membaca nama wilayah. Coba lagi atau cari manual.'}}
+  const names=[...new Set(['city','county','municipality','town','regency','state_district','city_district'].map(k=>a[k]).filter(Boolean))],best={};
+  for(const n of names){try{((await api('/sholat/kabkota/cari/'+encodeURIComponent(core(n)))).data||[]).forEach(x=>{const sc=(core(x.lokasi)==core(n)?2:0)+(/^(kota|city)/i.test(n)==/^KOTA/.test(x.lokasi)?1:0);if(!best[x.id]||best[x.id].sc<sc)best[x.id]={x,sc}})}catch(e){}}
+  const L=Object.values(best).sort((u,v)=>v.sc-u.sc),top=L.filter(h=>h.sc==(L[0]||{}).sc);
+  if(!L.length)throw {m:'Wilayah Anda ('+esc(names[0]||'?')+') tidak ditemukan. Cari manual.'};
+  if(top.length==1&&L[0].sc>=2){pick(L[0].x);am.textContent='Otomatis: '+L[0].x.lokasi}
+  else{am.textContent='Pilih yang sesuai';showRes(L.slice(0,6).map(h=>h.x),'Beberapa kecocokan. Pilih lokasi Anda:')}
+ }catch(e){am.textContent=e&&e.code==1?'Izin lokasi ditolak. Aktifkan di pengaturan browser atau cari manual.':(e.m||'Gagal mendeteksi lokasi. Cari manual.')}}
+$('auto').onchange=e=>{setAuto(e.target.checked);if(e.target.checked)detect()};
+$('det').onclick=()=>{setAuto(true);detect()};
+/* Kalender + libur */
+(async()=>{try{const r=await api('/cal/today?tz='+encodeURIComponent(TZ)),d=r.data;$('hij').textContent=`${d.hijr.today||d.hijr.day+' '+d.hijr.monthName+' '+d.hijr.year} H · ${d.ce.today}`}catch(e){}
+ try{const r=await api('/cal/holidays/today'),d=r.data;const t=d&&(d.name||d.title||(Array.isArray(d)&&d[0]&&(d[0].name||d[0].title)));if(t)$('hol').innerHTML=`<h2>Hari libur</h2><div class="card pad"><span class="tag">Libur</span> ${esc(t)}</div>`}catch(e){}})();
+/* Quran */
+async function loadQ(){$('qr').innerHTML='<span class="mu">Memuat…</span>';try{const d=(await api('/quran/random')).data;
+ $('qr').innerHTML=`<div class="ar">${esc(d.arab)}</div><div class="tr">${esc(d.translation)}</div><div class="meta">QS ${d.surah_number}:${d.ayah_number}${d.meta&&d.meta.juz?' · Juz '+d.meta.juz:''}</div>${d.audio_url?`<div class="gap"><button class="btn gray" id="pl">▶ Putar audio</button></div>`:''}`;
+ if(d.audio_url){const a=new Audio(d.audio_url);$('pl').onclick=()=>a.paused?a.play():a.pause()}}catch(e){$('qr').innerHTML='<div class="err">Gagal memuat ayat.</div>'}}
+async function loadH(){$('hd').innerHTML='<span class="mu">Memuat…</span>';try{const r=await api('/hadis/enc/random'),d=r.data;
+ $('hd').innerHTML=`<div class="ar">${esc(d.text.ar)}</div><div class="tr">${esc(d.text.id)}</div><div class="meta">${d.grade?`<span class="tag">${esc(d.grade)}</span> `:''}${esc(d.takhrij||'')}</div>`}catch(e){$('hd').innerHTML='<div class="err">Gagal memuat hadis.</div>'}}
+/* Kiblat */
+let qd=null,hd=null;
+function rot(){if(qd==null)return;$('nd').style.transform=`rotate(${qd-(hd||0)}deg)`}
+function onOri(e){const h=e.webkitCompassHeading!=null?e.webkitCompassHeading:(e.absolute&&e.alpha!=null?360-e.alpha:null);if(h!=null){hd=h;rot()}}
+$('qb').onclick=async()=>{$('qm').textContent='Mengambil lokasi…';
+ try{if(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission)await DeviceOrientationEvent.requestPermission()}catch(e){}
+ addEventListener('deviceorientationabsolute',onOri,true);addEventListener('deviceorientation',onOri,true);
+ navigator.geolocation.getCurrentPosition(async p=>{try{const r=await api(`/qibla/${p.coords.latitude},${p.coords.longitude}`);qd=r.data.direction;$('deg').textContent=qd.toFixed(1)+'°';$('qm').textContent='Putar HP hingga jarum merah lurus ke atas.';rot()}catch(e){$('qm').textContent='Gagal menghitung kiblat.'}},()=>$('qm').textContent='Izin lokasi ditolak.',{enableHighAccuracy:true})};
+setAuto(LS.auto!=='0');loadJ();if(LS.auto!=='0')detect();loadQ();loadH();
+</script>
+</body>
+</html>
