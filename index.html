@@ -4,78 +4,225 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Muslim Widget</title>
-<meta name="theme-color" content="#F2F2F7">
+<meta name="theme-color" content="#F6EFDC">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Muslim">
 <link rel="apple-touch-icon" id="ati" href="">
 <style>
-:root{--bg:#F2F2F7;--card:#fff;--tx:#000;--mu:#8E8E93;--ac:#007AFF;--rd:#FF3B30;--gn:#34C759;--ln:rgba(0,0,0,.08);--g:12px;--nav:64px}
+:root{
+  --cream:#F6EFDC;--paper:#FBF6E8;--gold:#B8924A;--gold-l:#E3CD97;--gold-d:#7E5F26;
+  --green:#0E4B39;--green-d:#083628;--mint:#B9DCCB;--ink:#2B2416;--mu:#7D6F50;
+  --rd:#B3261E;--gn:#2E7D4F;--g:14px;--nav:72px;
+}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0}
-html,body{height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text',sans-serif;background:var(--bg);color:var(--tx);font-size:15px;padding:env(safe-area-inset-top) 0 0}
+html,body{min-height:100%}
+body{
+  font-family:'Amiri','Noto Naskh Arabic','Georgia',serif;
+  color:var(--ink);font-size:16px;
+  background:
+    radial-gradient(ellipse at 15% 20%,#FFFBEF 0%,transparent 55%),
+    radial-gradient(ellipse at 85% 80%,#FFFBEF 0%,transparent 50%),
+    var(--cream);
+  padding-top:env(safe-area-inset-top);
+  overflow-x:hidden;
+}
+body::before{ /* pola geometris halus di seluruh latar */
+  content:'';position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background-image:
+    repeating-conic-gradient(from 0deg at 50% 50%,rgba(184,146,74,.07) 0 10deg,transparent 10deg 20deg);
+  background-size:260px 260px;
+  -webkit-mask:radial-gradient(circle at 50% 50%,#000 0%,transparent 70%);
+          mask:radial-gradient(circle at 50% 50%,#000 0%,transparent 70%);
+}
 button,input{font:inherit;transition:.2s ease}
-main{padding:var(--g);padding-bottom:calc(var(--nav) + var(--g) + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
-h1{font-size:clamp(26px,6vw,32px);font-weight:700;margin:8px 4px 14px}
-h2{font-size:12px;text-transform:uppercase;color:var(--mu);letter-spacing:.04em;margin:18px 16px 6px;font-weight:600}
-.card{background:var(--card);border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.08);border:1px solid var(--ln);overflow:hidden}
-.pad{padding:16px}
-.hero{background:linear-gradient(145deg,#007AFF,#5AC8FA);color:#fff;border:0}
-.hero small{opacity:.85;font-size:13px}
-.hero .big{font-size:clamp(34px,10vw,48px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.row{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:0 16px;border-bottom:.5px solid var(--ln)}
-.row:last-child{border:0}
-.row.on{background:rgba(0,122,255,.08);color:var(--ac);font-weight:600}
-.row b{font-variant-numeric:tabular-nums;font-weight:600}
-.btn{min-height:44px;min-width:44px;padding:0 20px;border:0;border-radius:22px;background:var(--ac);color:#fff;font-weight:600;cursor:pointer}
-.btn:active{opacity:.7;transform:scale(.97)}
-.btn.gray{background:rgba(120,120,128,.14);color:var(--ac)}
-.btn.full{width:100%}
-input{width:100%;min-height:44px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);padding:0 14px;outline:0}
-input:focus{border-color:var(--ac)}
-.ar{font-size:clamp(22px,5.5vw,28px);line-height:2;text-align:right;direction:rtl;font-family:'Traditional Arabic','Noto Naskh Arabic',serif}
-.tr{line-height:1.55;margin-top:8px}
-.meta{color:var(--mu);font-size:13px;margin-top:10px}
-.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:rgba(52,199,89,.15);color:#1f9d44;font-size:12px;font-weight:600}
-.sec{display:none}.sec.on{display:block}
-.err{color:var(--rd);padding:16px;text-align:center}
+
+/* ===== Ornamen dekoratif (dibuat dengan CSS/SVG, bukan potongan gambar) ===== */
+.deco{position:fixed;pointer-events:none;z-index:0}
+.mandala{width:260px;height:260px;border-radius:50%;opacity:.35;
+  background:
+    radial-gradient(circle,transparent 46%,var(--gold) 47%,transparent 48%,transparent 56%,var(--gold) 57%,transparent 58%),
+    repeating-conic-gradient(from 0deg,var(--gold) 0 6deg,transparent 6deg 30deg);
+  -webkit-mask:radial-gradient(circle,#000 60%,transparent 72%);mask:radial-gradient(circle,#000 60%,transparent 72%)}
+.m-l{left:-90px;top:30%}
+.m-r{right:-90px;top:12%}
+.frame-line{position:fixed;top:0;bottom:0;width:14px;z-index:0;
+  background:repeating-linear-gradient(180deg,var(--gold) 0 2px,transparent 2px 8px);opacity:.45}
+.corner{position:fixed;width:150px;height:150px;z-index:0;pointer-events:none;opacity:.55}
+.corner svg{width:100%;height:100%;fill:none;stroke:var(--gold);stroke-width:1.4}
+.c-tl{top:0;left:0}.c-tr{top:0;right:0;transform:scaleX(-1)}
+.c-bl{bottom:0;left:0;transform:scaleY(-1)}.c-br{bottom:0;right:0;transform:scale(-1,-1)}
+.skyline{position:fixed;left:0;right:0;bottom:0;height:34vh;min-height:170px;z-index:0;pointer-events:none;opacity:.32}
+.skyline svg{width:100%;height:100%}
+
+/* ===== Layout ===== */
+main{position:relative;z-index:1;padding:var(--g);padding-bottom:calc(var(--nav) + var(--g) + env(safe-area-inset-bottom));max-width:760px;margin:0 auto}
+h1{font-family:'Amiri',Georgia,serif;font-size:clamp(30px,7vw,40px);font-weight:700;color:var(--gold-d);text-align:center;margin:8px 0 18px;text-shadow:0 1px 0 #fff}
+h1::after{content:'';display:block;width:160px;height:10px;margin:6px auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);
+  -webkit-mask:linear-gradient(#000 0 0) center/100% 1px no-repeat;mask:linear-gradient(#000 0 0) center/100% 1px no-repeat}
+
+/* sub-judul dengan garis emas + berlian */
+h2{position:relative;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--gold-d);letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:22px 4px 10px}
+h2::before,h2::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+h2::after{background:linear-gradient(270deg,transparent,var(--gold))}
+
+/* ===== Kartu bergaya bingkai emas ===== */
+.card{position:relative;background:linear-gradient(180deg,var(--paper),#F9F1DC);border-radius:18px;border:1.5px solid var(--gold);box-shadow:0 0 0 4px var(--cream),0 0 0 5px var(--gold-l),0 10px 24px rgba(90,64,20,.12);overflow:hidden;margin:0 6px}
+.pad{padding:18px}
 .mu{color:var(--mu)}
-.gap{display:flex;gap:10px;margin-top:12px}.gap .btn{flex:1}
-.res .row{cursor:pointer;min-height:48px}
-.sw{position:relative;width:51px;height:31px;flex:none}.sw input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;opacity:0;z-index:1;cursor:pointer;padding:0}
-.sw s{position:absolute;inset:0;background:rgba(120,120,128,.32);border-radius:99px;transition:.2s}
-.sw s:after{content:'';position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:.2s}
-.sw input:checked+s{background:var(--gn)}.sw input:checked+s:after{transform:translateX(20px)}
-.btn.sm{min-height:36px;padding:0 14px;font-size:14px}
-/* compass */
-.cmp{width:min(260px,70vw);aspect-ratio:1;margin:10px auto;border-radius:50%;border:1px solid var(--ln);position:relative;background:#fff;box-shadow:inset 0 0 0 10px var(--bg)}
-.cmp i{position:absolute;left:50%;top:8%;width:4px;height:42%;margin-left:-2px;background:var(--rd);border-radius:4px;transform-origin:50% 100%;transition:transform .3s}
-.cmp em{position:absolute;inset:0;font-style:normal;text-align:center;font-size:13px;color:var(--mu);padding-top:3px}
-.cmp span{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--tx)}
-/* nav: bottom tab bar on mobile */
-nav{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;height:calc(var(--nav) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-top:.5px solid var(--ln)}
-nav button{flex:1;border:0;background:none;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;cursor:pointer}
-nav button.on{color:var(--ac)}
+.meta{color:var(--mu);font-size:14px;margin-top:10px;text-align:center}
+
+/* hero hijau */
+.hero{background:
+    radial-gradient(circle at 85% 30%,rgba(255,255,255,.12) 0,transparent 35%),
+    repeating-conic-gradient(from 0deg at 100% 0%,rgba(227,205,151,.08) 0 8deg,transparent 8deg 16deg),
+    linear-gradient(135deg,#136048,var(--green-d));
+  color:#F4E7C2;border-color:var(--gold-d);padding:20px 22px 22px;text-align:left;margin:0 6px}
+.hero::after{ /* lengkungan pintu masjid di kanan atas */
+  content:'';position:absolute;right:22px;top:10px;width:86px;height:110px;
+  border:2px solid var(--gold);border-bottom:0;border-radius:50% 50% 0 0/70% 70% 0 0;opacity:.8;
+  background:linear-gradient(180deg,rgba(227,205,151,.12),transparent)}
+.hero::before{ /* kubah kecil */
+  content:'';position:absolute;right:58px;top:0;width:24px;height:22px;border-radius:50% 50% 0 0;
+  border:2px solid var(--gold);border-bottom:0;opacity:.8}
+.hero small{display:block;opacity:.9;font-size:14px;color:#EED9A2}
+#loc{font-size:13px;letter-spacing:.04em;opacity:.85}
+#nx{font-size:15px;font-weight:600;color:#F4E7C2}
+.hero .big{font-family:'Amiri',Georgia,serif;font-size:clamp(40px,11vw,56px);font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums;color:#FFF3D0;margin:4px 0 2px;text-shadow:0 2px 0 rgba(0,0,0,.2)}
+#hij{font-size:13px;opacity:.85}
+
+/* daftar waktu sholat: baris bergaya pill berbingkai emas */
+#jd{padding:8px;display:flex;flex-direction:column;gap:6px}
+.row{display:flex;justify-content:space-between;align-items:center;min-height:50px;padding:0 20px;border:1px solid var(--gold);border-radius:999px;background:linear-gradient(90deg,rgba(255,255,255,.55),rgba(227,205,151,.18) 50%,rgba(255,255,255,.55));font-size:17px;color:var(--ink)}
+.row b{font-variant-numeric:tabular-nums;font-weight:700;color:var(--gold-d)}
+.row.on{background:linear-gradient(90deg,#CFE8DA,var(--mint) 50%,#CFE8DA);border-color:var(--green);color:var(--green-d);font-weight:700;box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
+.row.on b{color:var(--green-d)}
+#jd .row:nth-child(1),#jd .row:nth-child(3),#jd .row:nth-child(4){font-size:16px}
+#jd .card,#res .row{border-radius:999px}
+#res{margin-top:10px;padding:8px;display:flex;flex-direction:column;gap:6px}
+#res .row{cursor:pointer;min-height:48px}
+
+/* badge libur */
+.tag{display:inline-block;padding:3px 12px;border-radius:99px;background:var(--green);color:#F4E7C2;font-size:12px;font-weight:700;letter-spacing:.04em}
+
+/* ===== Kontrol ===== */
+.btn{min-height:46px;min-width:44px;padding:0 22px;border:1px solid var(--gold-d);border-radius:999px;background:linear-gradient(180deg,#17604A,var(--green-d));color:#F4E7C2;font-weight:700;letter-spacing:.03em;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 4px 10px rgba(8,54,40,.25)}
+.btn:active{opacity:.85;transform:scale(.98)}
+.btn.gray{background:linear-gradient(180deg,#FFF8E6,#EFDFB5);color:var(--green-d);border-color:var(--gold);box-shadow:0 2px 6px rgba(90,64,20,.15)}
+.btn.full{width:100%}
+.btn.sm{min-height:38px;padding:0 16px;font-size:14px}
+.gap{display:flex;gap:10px;margin:14px 6px 0}.gap .btn{flex:1}
+input{width:100%;min-height:48px;border-radius:999px;border:1px solid var(--gold);background:#FFFCF2;padding:0 48px 0 18px;outline:0;color:var(--ink);font-size:16px;box-shadow:inset 0 2px 4px rgba(90,64,20,.08)}
+input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(14,75,57,.15)}
+input::placeholder{color:#A8996F}
+
+/* switch emas */
+.sw{position:relative;width:52px;height:30px;flex:none}
+.sw input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;opacity:0;z-index:1;cursor:pointer;padding:0}
+.sw s{position:absolute;inset:0;background:#E8DCC0;border:1px solid var(--gold);border-radius:99px;transition:.2s}
+.sw s:after{content:'';position:absolute;left:2px;top:2px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF,#E9D7A6);box-shadow:0 2px 4px rgba(0,0,0,.25);transition:.2s}
+.sw input:checked+s{background:var(--green);border-color:var(--green-d)}
+.sw input:checked+s:after{transform:translateX(22px)}
+
+/* panel lokasi */
+.loc-panel{padding:6px 0 0}
+.loc-panel .row{border-radius:0;border:0;border-bottom:1px solid rgba(184,146,74,.35);background:none;padding:0 18px;min-height:52px;box-shadow:none}
+.loc-panel .row:last-child{border:0}
+.loc-panel .row span{font-size:16px}
+.search-wrap{position:relative;padding:14px 16px 18px}
+.search-wrap .icon-btn{position:absolute;right:24px;top:50%;transform:translateY(-50%);margin-top:7px;width:38px;height:38px;border-radius:50%;border:1px solid var(--gold-d);background:radial-gradient(circle at 35% 30%,#1C6B53,var(--green-d));color:#F4E7C2;display:grid;place-items:center;cursor:pointer;pointer-events:none}
+.search-wrap .icon-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+
+/* ===== Kiblat ===== */
+#s-qibla .card{padding:26px 22px 24px;text-align:center;background:linear-gradient(180deg,#FBF3DC,#F3E4BC);border-radius:4px 4px 18px 18px;border-top-left-radius:110px 110px;border-top-right-radius:110px 110px;border-color:var(--gold-d);margin:0 auto;max-width:440px}
+.cmp{width:min(270px,72vw);aspect-ratio:1;margin:12px auto 6px;border-radius:50%;position:relative;
+  background:radial-gradient(circle,#FFFBEF 0 55%,#EBD9A8 56%,#D9BE7E 70%,#B8924A 100%);
+  box-shadow:0 10px 26px rgba(90,64,20,.35),inset 0 0 0 8px #C9A662,inset 0 0 0 10px #8A6A2E}
+.cmp::before{content:'';position:absolute;inset:26px;border-radius:50%;border:1px dashed rgba(126,95,38,.45);background:repeating-conic-gradient(from 0deg,rgba(126,95,38,.22) 0 1deg,transparent 1deg 10deg)}
+.cmp::after{content:'';position:absolute;inset:50px;border-radius:50%;background:radial-gradient(circle,#FFF8E6,#EBD9A8);box-shadow:inset 0 0 0 1px rgba(126,95,38,.4)}
+.cmp em{position:absolute;top:10px;left:0;right:0;text-align:center;font-style:normal;font-weight:700;font-size:15px;color:var(--gold-d);z-index:2}
+.cmp i{position:absolute;left:50%;top:22%;width:6px;height:28%;margin-left:-3px;background:linear-gradient(180deg,var(--rd) 50%,#E8B43A 50%);border-radius:6px 6px 2px 2px;transform-origin:50% 100%;transition:transform .3s;z-index:3;clip-path:polygon(50% 0,100% 100%,0 100%);width:14px;margin-left:-7px;top:24%;height:26%;border-radius:0}
+.cmp span{position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#6B5A38,#1E160A);z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+#deg{font-family:'Amiri',Georgia,serif;font-size:36px;font-weight:700;color:var(--green-d);margin-top:8px}
+#s-qibla .meta{font-size:15px}
+
+/* ===== Quran & Hadis ===== */
+#qr,#hd{padding:22px 20px;background:linear-gradient(180deg,#FBF3DC,#F5E9C8);border-radius:18px}
+.ar{font-size:clamp(26px,6vw,32px);line-height:2.1;text-align:right;direction:rtl;font-family:'Amiri','Traditional Arabic','Noto Naskh Arabic',serif;color:var(--green-d)}
+.tr{line-height:1.7;margin-top:12px;font-size:16px;color:var(--ink);padding-top:12px;border-top:1px dashed rgba(184,146,74,.6)}
+.err{color:var(--rd);padding:16px;text-align:center}
+.sec{display:none}.sec.on{display:block}
+
+/* ===== Navigasi ===== */
+nav{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;height:calc(var(--nav) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);
+  background:linear-gradient(180deg,#FBF4E0,#F1E4C0);border-top:1.5px solid var(--gold);box-shadow:0 -6px 18px rgba(90,64,20,.12)}
+nav button{flex:1;border:0;background:none;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;cursor:pointer;position:relative}
+nav button.on{color:var(--green-d)}
+nav button.on::before{content:'';position:absolute;top:0;width:44px;height:3px;border-radius:0 0 4px 4px;background:var(--gold)}
+nav button.on svg{stroke:var(--green-d)}
 nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-@media(min-width:768px){:root{--g:20px}
- nav{top:0;bottom:auto;right:auto;width:76px;height:100%;flex-direction:column;justify-content:flex-start;padding:calc(20px + env(safe-area-inset-top)) 0;border-top:0;border-right:.5px solid var(--ln)}
- nav button{flex:0 0 64px}nav button span{display:none}
- main{margin-left:76px;padding-bottom:var(--g);max-width:none}main>div{max-width:720px;margin:0 auto}}
-@media(min-width:1025px){:root{--g:24px;font-size:14px}body{font-size:14px}
- nav{width:220px;align-items:stretch;padding-left:12px;padding-right:12px}
- nav button{flex:0 0 44px;flex-direction:row;justify-content:flex-start;gap:12px;padding:0 14px;border-radius:12px;font-size:15px}
- nav button span{display:inline}nav button.on{background:rgba(0,122,255,.1)}
- main{margin-left:220px}}
+
+@media(min-width:768px){
+ :root{--g:22px}
+ .frame-line{display:block}
+ nav{top:0;bottom:auto;right:auto;width:92px;height:100%;flex-direction:column;justify-content:flex-start;padding:28px 0 calc(20px + env(safe-area-inset-bottom));border-top:0;border-right:1.5px solid var(--gold);box-shadow:4px 0 18px rgba(90,64,20,.1)}
+ nav button{flex:0 0 66px;width:100%;margin-bottom:6px}
+ nav button span{display:none}
+ nav button.on{background:linear-gradient(90deg,transparent,rgba(14,75,57,.1));border-right:0}
+ nav button.on::before{top:50%;left:auto;right:0;width:3px;height:44px;transform:translateY(-50%);border-radius:3px 0 0 3px}
+ main{margin-left:92px;padding-bottom:var(--g);max-width:none}
+ main>div{max-width:720px;margin:0 auto}
+ h1{text-align:center}
+}
+@media(min-width:1025px){
+ :root{--g:26px}body{font-size:17px}
+ nav{width:230px;align-items:stretch;padding:28px 14px calc(20px + env(safe-area-inset-bottom))}
+ nav::before{content:'Muslim';display:block;font-family:'Amiri',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold-d);text-align:center;margin-bottom:26px;letter-spacing:.04em}
+ nav button{flex:0 0 48px;flex-direction:row;justify-content:flex-start;gap:14px;padding:0 18px;border-radius:14px;font-size:16px;margin-bottom:6px}
+ nav button span{display:inline}
+ nav button.on{background:linear-gradient(90deg,#0E4B39,#136048);color:#F4E7C2;border:1px solid var(--gold)}
+ nav button.on svg{stroke:#F4E7C2}
+ nav button.on::before{display:none}
+ main{margin-left:230px}
+ .skyline{height:40vh}
+}
 </style>
 </head>
 <body>
+
+<!-- ornamen dekoratif -->
+<div class="deco mandala m-l" aria-hidden="true"></div>
+<div class="deco mandala m-r" aria-hidden="true"></div>
+<div class="frame-line" style="left:92px" aria-hidden="true"></div>
+<div class="corner c-tl" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M4 146V40Q4 4 40 4H146"/><path d="M14 146V46Q14 14 46 14H146"/><path d="M26 120Q26 26 120 26"/><circle cx="46" cy="46" r="10"/><path d="M46 36l4 6 6 0-4 5 2 7-8-4-8 4 2-7-4-5 6 0z"/></svg></div>
+<div class="corner c-tr" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M4 146V40Q4 4 40 4H146"/><path d="M14 146V46Q14 14 46 14H146"/><path d="M26 120Q26 26 120 26"/><circle cx="46" cy="46" r="10"/><path d="M46 36l4 6 6 0-4 5 2 7-8-4-8 4 2-7-4-5 6 0z"/></svg></div>
+<div class="corner c-bl" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M4 146V40Q4 4 40 4H146"/><path d="M14 146V46Q14 14 46 14H146"/><path d="M26 120Q26 26 120 26"/><circle cx="46" cy="46" r="10"/></svg></div>
+<div class="corner c-br" aria-hidden="true"><svg viewBox="0 0 150 150"><path d="M4 146V40Q4 4 40 4H146"/><path d="M14 146V46Q14 14 46 14H146"/><path d="M26 120Q26 26 120 26"/><circle cx="46" cy="46" r="10"/></svg></div>
+<div class="skyline" aria-hidden="true">
+ <svg viewBox="0 0 1000 200" preserveAspectRatio="xMidYMax slice" fill="#B8924A">
+  <path d="M370 200V140Q370 58 500 30Q630 58 630 140V200Z"/>
+  <circle cx="500" cy="26" r="5"/><rect x="498" y="14" width="4" height="10"/>
+  <path d="M258 200V152Q258 112 306 104Q354 112 354 152V200Z"/>
+  <path d="M646 200V152Q646 112 694 104Q742 112 742 152V200Z"/>
+  <path d="M184 200V152Q184 124 214 118Q244 124 244 152V200Z"/>
+  <path d="M756 200V152Q756 124 786 118Q816 124 816 152V200Z"/>
+  <rect x="198" y="58" width="14" height="142"/><path d="M198 58l7-22 7 22z"/>
+  <rect x="788" y="58" width="14" height="142"/><path d="M788 58l7-22 7 22z"/>
+  <rect x="318" y="48" width="12" height="152"/><path d="M318 48l6-20 6 20z"/>
+  <rect x="670" y="48" width="12" height="152"/><path d="M670 48l6-20 6 20z"/>
+  <rect x="100" y="110" width="10" height="90"/><rect x="890" y="110" width="10" height="90"/>
+  <rect x="0" y="180" width="1000" height="20"/>
+ </svg>
+</div>
+
 <main><div>
 <section class="sec on" id="s-home">
  <h1>Jadwal Sholat</h1>
  <div class="card hero pad">
   <small id="loc">Pilih kota…</small>
-  <div style="margin-top:6px"><small id="nx">Sholat berikutnya</small></div>
+  <div style="margin-top:8px"><small id="nx">Sholat berikutnya</small></div>
   <div class="big" id="cd">--:--:--</div>
   <small id="hij"></small>
  </div>
@@ -83,49 +230,54 @@ nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;st
  <div class="card" id="jd"><div class="pad mu">Memuat…</div></div>
  <div id="hol"></div>
  <h2>Lokasi</h2>
- <div class="card">
+ <div class="card loc-panel">
   <div class="row"><span>Deteksi otomatis</span><label class="sw"><input type="checkbox" id="auto" aria-label="Deteksi otomatis"><s></s></label></div>
-  <div class="row"><span class="mu" id="am" style="font-size:13px">Manual</span><button class="btn gray sm" id="det">Deteksi sekarang</button></div>
-  <div style="padding:12px 16px 16px"><input id="q" placeholder="Atau cari manual, mis. depok" autocomplete="off"></div>
+  <div class="row"><span class="mu" id="am" style="font-size:14px">Manual</span><button class="btn gray sm" id="det">Deteksi sekarang</button></div>
+  <div class="search-wrap"><input id="q" placeholder="Atau cari manual, mis. depok" autocomplete="off"><span class="icon-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span></div>
  </div>
  <div class="card res" id="res" style="margin-top:10px;display:none"></div>
 </section>
+
 <section class="sec" id="s-qibla">
  <h1>Arah Kiblat</h1>
- <div class="card pad" style="text-align:center">
+ <div class="card">
   <div class="cmp"><em>U</em><i id="nd"></i><span></span></div>
-  <div class="big" id="deg" style="font-size:34px;font-weight:700">—</div>
+  <div class="big" id="deg">—</div>
   <div class="meta" id="qm">Tekan tombol untuk memakai lokasi &amp; kompas HP.</div>
-  <div class="gap"><button class="btn" id="qb">Gunakan Lokasi</button></div>
+  <div class="gap" style="justify-content:center"><button class="btn" id="qb">Gunakan Lokasi</button></div>
  </div>
 </section>
+
 <section class="sec" id="s-quran">
  <h1>Ayat Acak</h1>
- <div class="card pad" id="qr"><span class="mu">Memuat…</span></div>
+ <div class="card" id="qr"><span class="mu">Memuat…</span></div>
  <div class="gap"><button class="btn full" onclick="loadQ()">Ayat lain</button></div>
 </section>
+
 <section class="sec" id="s-hadis">
  <h1>Hadis Acak</h1>
- <div class="card pad" id="hd"><span class="mu">Memuat…</span></div>
+ <div class="card" id="hd"><span class="mu">Memuat…</span></div>
  <div class="gap"><button class="btn full" onclick="loadH()">Hadis lain</button></div>
 </section>
 </div></main>
+
 <nav id="nav">
  <button data-t="home" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Sholat</span></button>
  <button data-t="qibla"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Kiblat</span></button>
  <button data-t="quran"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2zM4 19V5M9 7h6"/></svg><span>Quran</span></button>
  <button data-t="hadis"><svg viewBox="0 0 24 24"><path d="M5 4h14v16l-7-4-7 4z"/></svg><span>Hadis</span></button>
 </nav>
+
 <script>
 const API='https://api.myquran.com/v3',$=id=>document.getElementById(id),LS=localStorage;
 const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const TZ=Intl.DateTimeFormat().resolvedOptions().timeZone||'Asia/Jakarta';
 async function api(p,opt){const k='c:'+p;try{const r=await fetch(API+p,opt);if(!r.ok)throw 0;const j=await r.json();if(!opt)LS[k]=JSON.stringify({d:new Date().toDateString(),j});return j}catch(e){const c=LS[k];if(c)return JSON.parse(c).j;throw e}}
 /* PWA: manifest + ikon dibuat otomatis dari satu file */
-(function(){const mk=n=>{const c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,n,n);g.addColorStop(0,'#007AFF');g.addColorStop(1,'#5AC8FA');x.fillStyle=g;x.fillRect(0,0,n,n);x.fillStyle='#fff';x.beginPath();x.arc(n*.52,n/2,n*.27,0,7);x.fill();x.fillStyle=g;x.beginPath();x.arc(n*.6,n*.46,n*.24,0,7);x.fill();x.fillStyle='#fff';x.font=n*.2+'px serif';x.fillText('★',n*.58,n*.55);return c.toDataURL('image/png')};
+(function(){const mk=n=>{const c=document.createElement('canvas');c.width=c.height=n;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,n,n);g.addColorStop(0,'#0E4B39');g.addColorStop(1,'#136048');x.fillStyle=g;x.fillRect(0,0,n,n);x.fillStyle='#E3CD97';x.beginPath();x.arc(n/2,n*.56,n*.3,Math.PI,0);x.lineTo(n*.7,n*.82);x.lineTo(n*.3,n*.82);x.fill();x.fillStyle='#0E4B39';x.beginPath();x.arc(n/2,n*.56,n*.12,Math.PI,0);x.lineTo(n*.62,n*.82);x.lineTo(n*.38,n*.82);x.fill();return c.toDataURL('image/png')};
 const i192=mk(192),i512=mk(512);$('ati').href=i512;
 const u=location.href.split('#')[0];
-const m={name:'Muslim Widget',short_name:'Muslim',start_url:u,scope:u.replace(/[^/]*$/,''),display:'standalone',background_color:'#F2F2F7',theme_color:'#F2F2F7',lang:'id',icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
+const m={name:'Muslim Widget',short_name:'Muslim',start_url:u,scope:u.replace(/[^/]*$/,''),display:'standalone',background_color:'#F6EFDC',theme_color:'#0E4B39',lang:'id',icons:[{src:i192,sizes:'192x192',type:'image/png',purpose:'any maskable'},{src:i512,sizes:'512x512',type:'image/png',purpose:'any maskable'}]};
 const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(m)],{type:'application/manifest+json'}));document.head.appendChild(l);
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))})();
 /* Tabs */
@@ -145,10 +297,11 @@ function tick(){if(!times)return;const now=new Date(),n=now.getHours()*3600+now.
  $('jd').innerHTML=PR.map(([k,l])=>`<div class="row ${k==nx?'on':''}"><span>${l}</span><b>${esc(times[k])}</b></div>`).join('')}
 setInterval(tick,1000);
 function showRes(L,msg){const r=$('res');r.style.display='block';
- r.innerHTML=(msg?`<div class="pad mu" style="font-size:13px">${msg}</div>`:'')+(L.length?L.map((c,i)=>`<div class="row" data-i="${i}">${esc(c.lokasi)}</div>`).join(''):'<div class="pad mu">Tidak ditemukan.</div>');
+ r.innerHTML=(msg?`<div class="pad mu" style="font-size:14px">${msg}</div>`:'')+(L.length?L.map((c,i)=>`<div class="row" data-i="${i}">${esc(c.lokasi)}</div>`).join(''):'<div class="pad mu">Tidak ditemukan.</div>');
  r.querySelectorAll('.row[data-i]').forEach(el=>el.onclick=()=>{setAuto(false);pick(L[el.dataset.i])})}
 function pick(c){city=c;LS.city=JSON.stringify(c);$('res').style.display='none';$('q').value='';loadJ()}
-$('q').oninput=e=>{clearTimeout(window.dt);const v=e.target.value.trim();if(v.length<3){$('res').style.display='none';return}
+let dt;
+$('q').oninput=e=>{clearTimeout(dt);const v=e.target.value.trim();if(v.length<3){$('res').style.display='none';return}
  dt=setTimeout(async()=>{try{showRes((await api('/sholat/kabkota/cari/'+encodeURIComponent(v))).data||[])}catch(e){$('res').style.display='block';$('res').innerHTML='<div class="err">Gagal mencari.</div>'}},350)};
 /* Lokasi otomatis: GPS -> nama wilayah (OSM) -> cocokkan ke daftar kab/kota Kemenag */
 const setAuto=v=>{LS.auto=v?'1':'0';$('auto').checked=v;$('am').textContent=v?'Otomatis (GPS)':'Manual'};
@@ -168,13 +321,13 @@ $('auto').onchange=e=>{setAuto(e.target.checked);if(e.target.checked)detect()};
 $('det').onclick=()=>{setAuto(true);detect()};
 /* Kalender + libur */
 (async()=>{try{const r=await api('/cal/today?tz='+encodeURIComponent(TZ)),d=r.data;$('hij').textContent=`${d.hijr.today||d.hijr.day+' '+d.hijr.monthName+' '+d.hijr.year} H · ${d.ce.today}`}catch(e){}
- try{const r=await api('/cal/holidays/today'),d=r.data;const t=d&&(d.name||d.title||(Array.isArray(d)&&d[0]&&(d[0].name||d[0].title)));if(t)$('hol').innerHTML=`<h2>Hari libur</h2><div class="card pad"><span class="tag">Libur</span> ${esc(t)}</div>`}catch(e){}})();
+ try{const r=await api('/cal/holidays/today'),d=r.data;const t=d&&(d.name||d.title||(Array.isArray(d)&&d[0]&&(d[0].name||d[0].title)));if(t)$('hol').innerHTML=`<h2>Hari libur</h2><div class="card pad" style="text-align:center"><span class="tag">LIBUR</span> &nbsp;${esc(t)}</div>`}catch(e){}})();
 /* Quran */
-async function loadQ(){$('qr').innerHTML='<span class="mu">Memuat…</span>';try{const d=(await api('/quran/random')).data;
- $('qr').innerHTML=`<div class="ar">${esc(d.arab)}</div><div class="tr">${esc(d.translation)}</div><div class="meta">QS ${d.surah_number}:${d.ayah_number}${d.meta&&d.meta.juz?' · Juz '+d.meta.juz:''}</div>${d.audio_url?`<div class="gap"><button class="btn gray" id="pl">▶ Putar audio</button></div>`:''}`;
+async function loadQ(){$('qr').innerHTML='<div class="pad"><span class="mu">Memuat…</span></div>';try{const d=(await api('/quran/random')).data;
+ $('qr').innerHTML=`<div class="pad"><div class="ar">${esc(d.arab)}</div><div class="tr">${esc(d.translation)}</div><div class="meta">QS ${d.surah_number}:${d.ayah_number}${d.meta&&d.meta.juz?' · Juz '+d.meta.juz:''}</div>${d.audio_url?`<div class="gap" style="margin:14px 0 0"><button class="btn gray" id="pl">▶ Putar audio</button></div>`:''}</div>`;
  if(d.audio_url){const a=new Audio(d.audio_url);$('pl').onclick=()=>a.paused?a.play():a.pause()}}catch(e){$('qr').innerHTML='<div class="err">Gagal memuat ayat.</div>'}}
-async function loadH(){$('hd').innerHTML='<span class="mu">Memuat…</span>';try{const r=await api('/hadis/enc/random'),d=r.data;
- $('hd').innerHTML=`<div class="ar">${esc(d.text.ar)}</div><div class="tr">${esc(d.text.id)}</div><div class="meta">${d.grade?`<span class="tag">${esc(d.grade)}</span> `:''}${esc(d.takhrij||'')}</div>`}catch(e){$('hd').innerHTML='<div class="err">Gagal memuat hadis.</div>'}}
+async function loadH(){$('hd').innerHTML='<div class="pad"><span class="mu">Memuat…</span></div>';try{const r=await api('/hadis/enc/random'),d=r.data;
+ $('hd').innerHTML=`<div class="pad"><div class="ar">${esc(d.text.ar)}</div><div class="tr">${esc(d.text.id)}</div><div class="meta">${d.grade?`<span class="tag">${esc(d.grade)}</span> `:''}${esc(d.takhrij||'')}</div></div>`}catch(e){$('hd').innerHTML='<div class="err">Gagal memuat hadis.</div>'}}
 /* Kiblat */
 let qd=null,hd=null;
 function rot(){if(qd==null)return;$('nd').style.transform=`rotate(${qd-(hd||0)}deg)`}
